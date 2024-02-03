@@ -3,6 +3,8 @@ package servlets;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -25,8 +27,11 @@ public class TimeServlet extends HttpServlet {
         super.init();
         engine = new TemplateEngine();
 
+        ServletContext servletContext = getServletContext();
+        String prefix = servletContext.getRealPath("/WEB-INF/classes/templates/") + "/";
+
         FileTemplateResolver resolver = new FileTemplateResolver();
-        resolver.setPrefix("D:/2_JAVA/HomeWork_Modul11_Cookies/src/main/resources/templates/");
+        resolver.setPrefix(prefix);
         resolver.setSuffix(".html");
         resolver.setTemplateMode("HTML5");
         resolver.setOrder(engine.getTemplateResolvers().size());
